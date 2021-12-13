@@ -20,13 +20,13 @@ MongoClient.connect(`mongodb://${config.dbHost}` , {
 }).then(client => {
   const db = client.db(config.dbName);
   const collection = db.collection(config.dbCollection);
-  app.local[config.dbCollection] = collection;
+  app.locals[config.dbCollection] = collection;
 })
 
 app.use(cors());
 app.use((req,res,next) => {
   const collection = req.app.locals[config.dbCollection];
-  req.collection = collection;
+  req.connection = collection;
   next();
 })
 
