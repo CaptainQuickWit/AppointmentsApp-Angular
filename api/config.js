@@ -1,6 +1,6 @@
 module.exports = {
     dbHost: 'localhost',
-    dbNAme: 'appointments-app',
+    dbName: 'appointments-app',
     dbCollection: 'appointments'
 }
 
