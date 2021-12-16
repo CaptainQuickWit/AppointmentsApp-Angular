@@ -23,3 +23,22 @@ describe('HomeComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+form-container {
+  margin-top: 50px;
+  max-width: 350px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.error {
+  background-color: #d84f4f;
+  padding: 10px;
+}
+
+.success {
+  background-color: #73cc73;
+  padding: 10px;
+}

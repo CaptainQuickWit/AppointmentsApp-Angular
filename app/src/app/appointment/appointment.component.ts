@@ -1,4 +1,8 @@
+
+
 import { Component, OnInit } from '@angular/core';
+import { AppointmentsService } from '../appointment.service';
+import { Appointment } from '../Appointment';
 
 @Component({
   selector: 'app-appointment',
@@ -7,9 +11,38 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppointmentComponent implements OnInit {
 
-  constructor() { }
+  public successMsg: string;
+  public errorMsg: string;
+  appointmentDate: string;
+  name: string;
+  email: string;
 
-  ngOnInit(): void {
+  constructor(private appointmentsService: AppointmentsService) { 
+    this.successMsg = '';
+    this.errorMsg = '';
+    this.appointmentDate = '';
+    this.name = '';
+    this.email = '';
+  }
+
+  ngOnInit() {
+  }
+
+  createAppointment() {
+    this.successMsg = '';
+    this.errorMsg = '';
+    this.appointmentsService.createAppointment(this.appointmentDate, this.name, this.email)
+      .subscribe((createdAppointment: Appointment) => {
+        this.appointmentDate = '';
+        this.name = '';
+        this.email = '';
+        const appointmentDate = createdAppointment.appointmentDate;
+        //const appointmentDate = new Date(variable).toDateString();
+        this.successMsg = `Appointment Booked Successfully for ${appointmentDate}`;
+      },
+      (error: ErrorEvent) => {
+        this.errorMsg = error.error.message;
+      });
   }
 
 }
